@@ -1,0 +1,17 @@
+[Unit]
+Description=Syncserver
+Documentation=https://github.com/mozilla-services/syncserver
+After=network.target
+
+[Service]
+Type=oneshot
+User=firefox
+group=firefox
+WorkingDirectory=/opt/syncserver
+ExecStart=/opt/syncserver/local/bin/gunicorn --daemon --paste /opt/syncserver/syncserver.ini
+ExecStop=pkill --pidfile /var/run/syncserver.pid
+PIDFile=/var/run/syncserver.pid
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
