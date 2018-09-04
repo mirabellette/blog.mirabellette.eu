@@ -6,10 +6,10 @@ After=network.target
 [Service]
 Type=oneshot
 User=firefox
-group=firefox
+Group=firefox
 WorkingDirectory=/opt/syncserver
 ExecStart=/opt/syncserver/local/bin/gunicorn --daemon --paste /opt/syncserver/syncserver.ini
-ExecStop=pkill --pidfile /var/run/syncserver.pid
+ExecStop=/usr/bin/pkill --pidfile /var/run/syncserver.pid
 PIDFile=/var/run/syncserver.pid
 RemainAfterExit=yes
 
